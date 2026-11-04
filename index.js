@@ -1,4 +1,4 @@
-const express = require("express");
+﻿const express = require("express");
 const os = require("os");
 
 const app = express();
@@ -7,7 +7,7 @@ const port = 80;
 const phrases = [
   "Get ready to be inspired…",
   "See rejection as redirection.",
-  "There is beauty in simplicity.",
+  "There is beauty in Medellin.",
   "You can't be late until you show up.",
   "Maybe life is testing you. Don't give up.",
   "Impossible is just an opinion.",

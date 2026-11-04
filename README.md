@@ -26,28 +26,30 @@ URL del ALB: `PEGAR_DNS_DEL_ALB`
 
 ## Evidencias
 
-| Prueba | Captura |
-|---|---|
-| Imagen en ECR | PEGAR |
-| 4 tareas RUNNING | PEGAR |
-| 4 destinos healthy | PEGAR |
-| Respuestas con distintos Container Id | PEGAR |
-| Tarea detenida y reemplazada | PEGAR |
-| Workflow exitoso en GitHub Actions | PEGAR |
-| Frase actualizada tras el push | PEGAR |
+## Evidencias
 
-Identificadores de contenedor observados: `PEGAR_ID_1`, `PEGAR_ID_2`, `PEGAR_ID_3`
+URL del ALB: http://randomquotes-alb-1088150322.us-east-1.elb.amazonaws.com
+
+Contenedores observados: `ip-172-31-5-88.ec2.internal`, `ip-172-31-52-154.ec2.internal`, `ip-172-31-75-217.ec2.interna`
+
+![Respuesta](evidencias/ids.png)
+![Imagen en ECR](evidencias/ecr.png)
+![4 tareas](evidencias/tareas.png)
+![Destinos healthy](evidencias/destinos.png)
+![Recuperación](evidencias/recuperacion.png)
+![GitHub Actions](evidencias/actions.png)
+![Versión actualizada](evidencias/frase.png)
 
 ## Preguntas del tutorial
 
-**¿Qué papel cumple el Application Load Balancer?** Es el único punto de entrada público. Recibe las solicitudes y las reparte entre las tareas saludables del Target Group, por eso cambia el Container Id entre respuestas.
+**¿Qué papel cumple el ALB?** Es el punto de entrada público y reparte las solicitudes entre las tareas saludables.
 
-**¿Por qué se crea una tarea nueva al detener una?** Porque el servicio declara un estado deseado de 4 tareas. Al quedar 3 en ejecución, se lanza una de reemplazo.
+**¿Por qué se crea una tarea nueva?** Porque el servicio exige 4 tareas; al quedar 3, lanza una de reemplazo.
 
-**¿Qué componente mantiene la cantidad deseada?** El programador del servicio de ECS (ECS Service).
+**¿Qué componente mantiene la cantidad deseada?** El servicio de ECS.
 
-**¿Qué efecto tiene el health check?** El ALB solo envía tráfico a destinos que responden bien en `/`. Si una tarea falla el chequeo, deja de recibir solicitudes y ECS la reemplaza.
+**¿Qué efecto tiene el health check?** El ALB solo envía tráfico a destinos saludables, y ECS reemplaza las tareas que fallan.
 
 ## Conclusiones
 
-ESCRIBIR 2 O 3 LÍNEAS PROPIAS.
+ECS mantuvo las 4 réplicas sin administrar servidores, y el ALB repartió el tráfico entre ellas. Un error real fue que el balanceador quedó con el grupo de seguridad de las tareas y sin regla IPv4, lo que hizo fallar los health checks hasta corregirlo.
