@@ -1,4 +1,4 @@
-# randomquotes
+﻿# randomquotes
 
 App Express que muestra una frase aleatoria y el hostname del contenedor. Se despliega en AWS: GitHub Actions → ECR → ECS Fargate (4 tareas) detrás de un Application Load Balancer.
 
@@ -22,15 +22,11 @@ Abrir http://localhost:8080
 - En GitHub → Settings → Secrets and variables → Actions, crear `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY` y `AWS_SESSION_TOKEN` con los valores de AWS Details → AWS CLI.
 - Esas credenciales vencen con la sesión del laboratorio: al abrir una sesión nueva hay que actualizar los tres secrets antes de hacer push.
 
-URL del ALB: `PEGAR_DNS_DEL_ALB`
-
-## Evidencias
-
 ## Evidencias
 
 URL del ALB: http://randomquotes-alb-1088150322.us-east-1.elb.amazonaws.com
 
-Contenedores observados: `ip-172-31-5-88.ec2.internal`, `ip-172-31-52-154.ec2.internal`, `ip-172-31-75-217.ec2.interna`
+Contenedores observados: `ip-172-31-5-88.ec2.internal`, `ip-172-31-52-154.ec2.internal`, `ip-172-31-75-217.ec2.internal`
 
 ![Respuesta](evidencias/ids.png)
 ![Imagen en ECR](evidencias/ecr.png)
